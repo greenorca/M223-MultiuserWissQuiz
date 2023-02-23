@@ -14,7 +14,7 @@ public class WissQuizApplication {
 	 private String envVar;
 	
 	public static void main(String[] args) {
-		SpringApplication.run(WissQuizApplication.class, args);
+		SpringApplication.run(ch.wiss.wiss_quiz.WissQuizApplication.class, args);
 	}
 
 	@GetMapping("/")

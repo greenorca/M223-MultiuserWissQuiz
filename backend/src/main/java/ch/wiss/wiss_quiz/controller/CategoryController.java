@@ -1,7 +1,6 @@
 package ch.wiss.wiss_quiz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +25,6 @@ public class CategoryController {
     return "Saved";
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
   @GetMapping(path = "")
   public Iterable<Category> getAllCategories() {
     return categoryRepository.findAll();
