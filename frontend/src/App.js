@@ -5,13 +5,14 @@ import {
   Outlet
 } from 'react-router-dom'
 
-import GameSession from './GameSession.js'
+import GameSelection from './GameSelection.js'
 import Home from './Home.js';
 import Rules from './Rules.js';
 import AboutUs from './AboutUs.js';
 import NotFound from './NotFound';
 import GlobalNavigation from './GlobalNavigation';
 import QuestionList from './QuestionList';
+import GameSession from './GameSession';
 
 function App(props) {
   return (
