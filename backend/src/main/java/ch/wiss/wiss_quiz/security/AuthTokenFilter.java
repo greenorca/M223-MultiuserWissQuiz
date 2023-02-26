@@ -2,6 +2,11 @@ package ch.wiss.wiss_quiz.security;
 
 import java.io.IOException;
 
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * a filter that executes once per request. So we create AuthTokenFilter class that extends OncePerRequestFilter and override doFilterInternal() method. 
@@ -36,9 +40,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
      * UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
      */
     @Override
-    protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request,
-        jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain)
-        throws jakarta.servlet.ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+        HttpServletResponse response, FilterChain filterChain)
+        throws ServletException, IOException {
       try {
         String jwt = parseJwt((HttpServletRequest) request);
         if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
