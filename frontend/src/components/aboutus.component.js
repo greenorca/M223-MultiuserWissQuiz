@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Highscore extends React.Component{
+class AboutUs extends React.Component{
     constructor(props){
         super(props);
     }
@@ -14,4 +14,4 @@ class Highscore extends React.Component{
     }
 }
 
-export default Highscore;
+export default AboutUs;
