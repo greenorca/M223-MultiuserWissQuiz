@@ -21,10 +21,10 @@ class GameSession extends React.Component{
 
     componentDidMount(){
       if(this.state.questions.length === 0){
-        fetch(process.env.REACT_APP_API_URL+"/quiz?cat_id=1")
+        fetch(process.env.REACT_APP_API_URL + "/quiz?cat_id=1")
           .then(response => response.json())
-          .then(data => this.setState({questions: data}))
-          .catch(err => {console.log(err)})
+          .then(data => this.setState({ questions: data }))
+          .catch(err => { console.log(err) })
       }
       else {
         console.log("nothing to do")
