@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import ch.wiss.wiss_quiz.model.Answer;
 import ch.wiss.wiss_quiz.model.AnswerRepository;
@@ -19,7 +20,8 @@ import ch.wiss.wiss_quiz.model.CategoryRepository;
 import ch.wiss.wiss_quiz.model.Question;
 import ch.wiss.wiss_quiz.model.QuestionRepository;
 
-@Controller // This means that this class is a Controller
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController // This means that this class is a Controller
 @RequestMapping(path="/question") // This means URL's start with /question (after Application path)
 public class QuestionController {
   @Autowired
