@@ -23,6 +23,7 @@ import Rules from "./Rules"
 import QuestionList from "./QuestionList"
 import NotFound from "./NotFound"
 import GlobalNavigation from "./GlobalNavigation"
+import BoardUser from "./components/board-user.component";
 
 //import BoardUser from "./components/board-user.component";
 //import BoardModerator from "./components/board-moderator.component";
@@ -64,6 +65,7 @@ class App extends Component {
 
   render(){
     const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -135,11 +137,17 @@ class App extends Component {
         <div className="container mt-3">
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="quiz" element={<GameSession />} />
-          <Route path="rules" element={<Rules />} />
-          <Route path="aboutus" element={<AboutUs />} />
-          <Route path="questionslist" element={<QuestionList />} />
+        <Route index element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/user" element={<BoardUser />} />
+        
+        <Route path="/quiz" element={<GameSession />} />
+        <Route path="/rules" element={<Rules />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/questionslist" element={<QuestionList />} />
         </Route>
         <Route path="*" element={<NotFound />}/>
       </Routes>

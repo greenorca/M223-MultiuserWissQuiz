@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
 
 import AuthService from "../services/auth.service";
 
@@ -23,7 +20,8 @@ class Login extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-
+    this.validateAll = this.validateAll.bind(this);
+    
     this.state = {
       username: "",
       password: "",
@@ -44,6 +42,11 @@ class Login extends Component {
     });
   }
 
+  validateAll(){
+    //TODO: proper validation!
+    return true;
+  }
+
   handleLogin(e) {
     e.preventDefault();
 
@@ -52,9 +55,9 @@ class Login extends Component {
       loading: true
     });
 
-    this.form.validateAll();
+    
 
-    if (this.checkBtn.context._errors.length === 0) {
+    if (this.validateAll() === true) {
       AuthService.login(this.state.username, this.state.password).then(
         () => {
           this.props.router.navigate("/profile");
@@ -84,6 +87,7 @@ class Login extends Component {
   render() {
     return (
       <div className="col-md-12">
+        <h4>Login</h4>
         <div className="card card-container">
           <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -91,7 +95,7 @@ class Login extends Component {
             className="profile-img-card"
           />
 
-          <Form
+          <form
             onSubmit={this.handleLogin}
             ref={c => {
               this.form = c;
@@ -99,7 +103,7 @@ class Login extends Component {
           >
             <div className="form-group">
               <label htmlFor="username">Username</label>
-              <Input
+              <input
                 type="text"
                 className="form-control"
                 name="username"
@@ -111,7 +115,7 @@ class Login extends Component {
 
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <Input
+              <input
                 type="password"
                 className="form-control"
                 name="password"
@@ -140,13 +144,13 @@ class Login extends Component {
                 </div>
               </div>
             )}
-            <CheckButton
+            <button
               style={{ display: "none" }}
               ref={c => {
                 this.checkBtn = c;
               }}
             />
-          </Form>
+          </form>
         </div>
       </div>
     );

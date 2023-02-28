@@ -2,7 +2,8 @@
 
 Dies ist ein Step-by-Step Repo für ein ReactJA-basiertes Frontend eines Online-Quizzes.
 
-Der schrittweise Aufbau ist in den Branches hinterlegt (inkl. Vorlage und Lösungsbranch)
+Die Multiuser-Funktionalität wurde von [https://www.bezkoder.com/react-jwt-auth/](https://www.bezkoder.com/react-jwt-auth/) übernommen. Bugs fixed: *login* und *register* Komponenten nutzen neue Form validation API: "form" statt "Form" und "input" statt "Input"
+
 
 ## Using Environment Variables
 
@@ -12,13 +13,13 @@ Der schrittweise Aufbau ist in den Branches hinterlegt (inkl. Vorlage und Lösun
 * begin variable names with `REACT_APP`, otherwise they are ignored
 * access environment variables like `process.env.REACT_APP_API_URL`
 
-## Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ### Available Scripts
 
 In the project directory, you can run:
+
+### `docker build`
+
+Create a docker image with NPM and the Frontend
 
 #### `npm install`
 
