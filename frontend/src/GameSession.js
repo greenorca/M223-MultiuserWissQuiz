@@ -24,7 +24,7 @@ class GameSession extends React.Component{
     componentDidMount(){
       if(this.state.questions.length === 0 && this.state.cat_id > 0 ){
         fetch(process.env.REACT_APP_API_URL + "/quiz?cat_id="+ this.state.cat_id)
-          .then(response => response.json())
+          .then(response => { console.log(response); return response.json()})
           .then(data => this.setState({ questions: data }))
           .catch(err => { console.log(err) })
       }
