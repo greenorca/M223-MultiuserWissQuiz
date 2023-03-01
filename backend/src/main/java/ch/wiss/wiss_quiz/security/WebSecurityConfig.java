@@ -50,7 +50,7 @@ public class WebSecurityConfig {
     return new BCryptPasswordEncoder();
   }
   
-  private final static String[] WHITELIST = { "/api/auth/**","/quiz/**", "category/**", "question", "/api/test/**" };
+  private final static String[] WHITELIST = { "/api/auth/**", "/category", "/quiz", "/api/test/**" };
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -58,8 +58,7 @@ public class WebSecurityConfig {
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and() //resolve compiler error with 
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .authorizeHttpRequests((authz) ->
-          authz.requestMatchers(WHITELIST)
-            .permitAll()
+          authz.requestMatchers(WHITELIST).permitAll()
             .anyRequest().authenticated()
         );
     

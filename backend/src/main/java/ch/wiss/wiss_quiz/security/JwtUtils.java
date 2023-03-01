@@ -45,9 +45,20 @@ public class JwtUtils {
     }
   }
 
+  /**
+   * generates the cookie
+   * @param userPrincipal
+   * @return
+   */
   public ResponseCookie generateJwtCookie(UserDetails userPrincipal) {
     String jwt = generateTokenFromUsername(userPrincipal.getUsername());
-    ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
+    
+    ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt)
+      .path("/")
+      .maxAge(24 * 60 * 60)
+      .httpOnly(true)
+      .build();
+    
     return cookie;
   }
 
