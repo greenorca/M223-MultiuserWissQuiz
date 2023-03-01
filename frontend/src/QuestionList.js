@@ -10,7 +10,7 @@ class QuestionList extends React.Component {
     }
 
     componentDidMount() {
-        fetch(process.env.REACT_APP_API_URL+"/question/")
+        fetch(process.env.REACT_APP_API_URL+"/question/",{mode:'cors'})
                 .then(response => response.json())
                 .then(data => this.setState({questions: data}))
                 .catch(err => {console.log(err)})

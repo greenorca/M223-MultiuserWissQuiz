@@ -12,7 +12,7 @@ import ch.wiss.wiss_quiz.model.Category;
 import ch.wiss.wiss_quiz.model.CategoryRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RestController // This means that this class is a Controller
+@RestController
 @RequestMapping(path = "/category") // This means URL's start with /demo (after Application path)
 public class CategoryController {
   @Autowired

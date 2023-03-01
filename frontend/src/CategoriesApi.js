@@ -1,6 +1,6 @@
 let topics = []
 
-fetch(process.env.REACT_APP_API_URL + "/category/")
+fetch(process.env.REACT_APP_API_URL + "/category/", {mode:'cors'})
           .then(response => response.json())
           .then(data => topics = data )
           .catch(err => { console.log(err) })

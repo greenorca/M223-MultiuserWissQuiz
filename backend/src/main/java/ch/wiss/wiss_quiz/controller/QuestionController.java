@@ -21,9 +21,10 @@ import ch.wiss.wiss_quiz.model.Question;
 import ch.wiss.wiss_quiz.model.QuestionRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RestController // This means that this class is a Controller
+@RestController
 @RequestMapping(path="/question") // This means URL's start with /question (after Application path)
 public class QuestionController {
+
   @Autowired
   private QuestionRepository questionRepository;
   @Autowired
@@ -31,28 +32,26 @@ public class QuestionController {
   @Autowired
   private AnswerRepository answerRepository;
   
-  //@CrossOrigin(origins = "http://localhost:3000")
   @PostMapping(path="/{cat_id}") // Map ONLY POST Requests
   public @ResponseBody String addNewQuestion(@PathVariable(value="cat_id") Integer catId, @RequestBody Question question) {
       
-	Optional<Category> cat = categoryRepository.findById(catId);
-	question.setCategory(cat.get());
-	// we need to store nested Answer-Objects seperately
-	List<Answer> answers = List.copyOf(question.getAnswers());
-	
-	question.setAnswers(null);
-	questionRepository.save(question);
-	
-	// we need to store nested Answer-Objects seperately
-	answers.forEach(a -> {
-		a.setQuestion(question);
-		answerRepository.save(a);
+    Optional<Category> cat = categoryRepository.findById(catId);
+    question.setCategory(cat.get());
+    // we need to store nested Answer-Objects seperately
+    List<Answer> answers = List.copyOf(question.getAnswers());
+    
+    question.setAnswers(null);
+    questionRepository.save(question);
+    
+    // we need to store nested Answer-Objects seperately
+    answers.forEach(a -> {
+      a.setQuestion(question);
+      answerRepository.save(a);
 	});
 	
 	return "Saved";
   }
   
-  //@CrossOrigin(origins = "http://localhost:3000")
   @GetMapping(path="")
   public @ResponseBody Iterable<Question> getAllQuestions() {    
     return questionRepository.findAll();

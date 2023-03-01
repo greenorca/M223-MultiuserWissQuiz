@@ -14,7 +14,8 @@ import org.springframework.stereotype.Component;
 /**
  * Handle Authentication Exception
  * override the commence() method. 
- * This method is triggered anytime unauthenticated User requests a secured HTTP resource and an AuthenticationException is thrown
+ * This method is triggered anytime unauthenticated User requests a secured HTTP resource 
+ * and an AuthenticationException is thrown
  */
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {

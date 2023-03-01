@@ -10,6 +10,7 @@ class GameSession extends React.Component{
     constructor(props){
       super(props)
       this.state = {
+        cat_id: props.catId,
         score: 0,
         index: 0,
         questions: typeof props.questions==='undefined' ? [] : props.questions,
@@ -17,11 +18,12 @@ class GameSession extends React.Component{
       }
       this.fetchAnswer = this.fetchAnswer.bind(this)
       this.nextQuestion =this.nextQuestion.bind(this)
+      this.componentDidMount = this.componentDidMount.bind(this)
     }
 
     componentDidMount(){
-      if(this.state.questions.length === 0){
-        fetch(process.env.REACT_APP_API_URL + "/quiz?cat_id=1")
+      if(this.state.questions.length === 0 && this.state.cat_id > 0 ){
+        fetch(process.env.REACT_APP_API_URL + "/quiz?cat_id="+ this.state.cat_id)
           .then(response => response.json())
           .then(data => this.setState({ questions: data }))
           .catch(err => { console.log(err) })

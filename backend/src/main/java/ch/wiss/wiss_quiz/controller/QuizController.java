@@ -20,6 +20,7 @@ import ch.wiss.wiss_quiz.model.QuestionRepository;
 @RestController
 @RequestMapping(path = "/quiz")
 public class QuizController {
+  
   private static final int MAX_QUESTIONS = 3;
   @Autowired
   private QuestionRepository questionRepository;
