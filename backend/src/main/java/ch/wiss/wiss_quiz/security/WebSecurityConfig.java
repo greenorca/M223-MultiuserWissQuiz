@@ -15,8 +15,6 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import ch.wiss.wiss_quiz.model.ERole;
-
 
 @Configuration
 @EnableWebSecurity
