@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.wiss.wiss_quiz.model.Answer;
-import ch.wiss.wiss_quiz.model.AnswerRepository;
-import ch.wiss.wiss_quiz.model.Category;
-import ch.wiss.wiss_quiz.model.CategoryRepository;
-import ch.wiss.wiss_quiz.model.Question;
-import ch.wiss.wiss_quiz.model.QuestionRepository;
+import ch.wiss.wiss_quiz.model.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -37,22 +33,24 @@ public class QuestionController {
       
     Optional<Category> cat = categoryRepository.findById(catId);
     question.setCategory(cat.get());
-    // we need to store nested Answer-Objects seperately
+    // we need to store nested Answer-Objects separately
     List<Answer> answers = List.copyOf(question.getAnswers());
     
     question.setAnswers(null);
     questionRepository.save(question);
     
-    // we need to store nested Answer-Objects seperately
+    // we need to store nested Answer-Objects separately
     answers.forEach(a -> {
       a.setQuestion(question);
       answerRepository.save(a);
-	});
+	  });
 	
 	return "Saved";
   }
   
+
   @GetMapping(path="")
+  @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
   public @ResponseBody Iterable<Question> getAllQuestions() {    
     return questionRepository.findAll();
   } 
