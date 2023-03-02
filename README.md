@@ -8,3 +8,11 @@ Die Teilkomponenten und allfällige Docker-Deployments sind in den Unterordnern 
 
 Ziel des Moduls 223 ist der Umbau dieser App zu einer Multiuser-App mit Quiz-Admins und Spielern.
 
+## Hinweis:
+
+Die Authentifizierung und Authorisierung zunächst im Backend implementieren und z.B.mit POSTMAN testen:
+
+![](img/2023-03-02-08-51-22.png)
+
+siehe: [https://dev.to/loopdelicious/using-jwt-to-authenticate-and-authorize-requests-in-postman-3a5h](https://dev.to/loopdelicious/using-jwt-to-authenticate-and-authorize-requests-in-postman-3a5h)
+
