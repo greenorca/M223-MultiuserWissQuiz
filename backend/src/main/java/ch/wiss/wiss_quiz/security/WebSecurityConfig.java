@@ -15,6 +15,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import ch.wiss.wiss_quiz.model.ERole;
+
 
 @Configuration
 @EnableWebSecurity
@@ -50,8 +52,9 @@ public class WebSecurityConfig {
     return new BCryptPasswordEncoder();
   }
   
-  private final static String[] WHITELIST = { "/api/auth/**", "/category", "/quiz", "/api/test/**" };
-
+  private final static String[] WHITELIST = { "/api/auth/**", "/category", "/quiz", "/api/test/**", "/api/all/**" };
+  //private final static String[] WHITELIST = { "/api/auth/**", "/category", "/question", "/quiz", "/api/test/**" };
+  private final static String[] ROLES = { "MODERATOR", "ADMIN", "USER"};
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable()
@@ -59,6 +62,7 @@ public class WebSecurityConfig {
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .authorizeHttpRequests((authz) ->
           authz.requestMatchers(WHITELIST).permitAll()
+            .requestMatchers("/question").hasAnyRole(ROLES)
             .anyRequest().authenticated()
         );
     
