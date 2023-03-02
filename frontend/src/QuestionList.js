@@ -10,11 +10,21 @@ class QuestionList extends React.Component {
     }
 
     componentDidMount() {
-        fetch(process.env.REACT_APP_API_URL+"/question",{mode:'cors'})
-                .then(response => response.json())
+        /**
+         * since questions is is only for moderator users,
+         * we fetch the jwt token and add it to the backend request 
+         */
+        if (localStorage.getItem("user")){
+            // fetch the jwt token
+            const token = JSON.parse(localStorage.getItem("user")).accessToken;
+            fetch(process.env.REACT_APP_API_URL+"/question", {
+                    // add JWT token to request
+                    headers: {Authorization: "Bearer "+ token} 
+                })
+                .then(response => { console.log(response); return response.json()})
                 .then(data => this.setState({questions: data}))
                 .catch(err => {console.log(err)})
-
+        }
     }
 
     render(){

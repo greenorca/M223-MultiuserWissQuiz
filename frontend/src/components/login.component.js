@@ -53,9 +53,7 @@ class Login extends Component {
     this.setState({
       message: "",
       loading: true
-    });
-
-    
+    });    
 
     if (this.validateAll() === true) {
       AuthService.login(this.state.username, this.state.password).then(
@@ -88,7 +86,7 @@ class Login extends Component {
     return (
       <div className="col-md-12">
         <h4>Login</h4>
-        <div className="card card-container">
+        <div className="card card-container bg-dark">
           <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             alt="profile-img"
