@@ -15,15 +15,15 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-  @Autowired
-  UserDetailsServiceImpl userDetailsService;
+  @Autowired private UserDetailsServiceImpl userDetailsService;
+  @Autowired private AuthenticationEntryPoint unauthorizedHandler;
 
-  @Autowired
-  private AuthenticationEntryPoint unauthorizedHandler;
+  private final static String[] WHITELIST = { "/api/auth/**", "/category", "/quiz", "/api/test/**", "/api/all/**" };
+  private final static String[] SECURELIST = { "/question" };
+  private final static String[] ROLES = { "MODERATOR", "ADMIN"};
 
   @Bean
   public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -32,11 +32,9 @@ public class WebSecurityConfig {
 
   @Bean
   public DaoAuthenticationProvider authenticationProvider() {
-      DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-       
+      DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();      
       authProvider.setUserDetailsService(userDetailsService);
-      authProvider.setPasswordEncoder(passwordEncoder());
-   
+      authProvider.setPasswordEncoder(passwordEncoder());   
       return authProvider;
   }
   
@@ -50,25 +48,18 @@ public class WebSecurityConfig {
     return new BCryptPasswordEncoder();
   }
   
-  private final static String[] WHITELIST = { "/api/auth/**", "/category", "/quiz", "/api/test/**", "/api/all/**" };
-  //private final static String[] WHITELIST = { "/api/auth/**", "/category", "/question", "/quiz", "/api/test/**" };
-  private final static String[] ROLES = { "MODERATOR", "ADMIN", "USER"};
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable()
-        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and() //resolve compiler error with 
+        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and() 
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .authorizeHttpRequests((authz) ->
           authz.requestMatchers(WHITELIST).permitAll()
-            .requestMatchers("/question").hasAnyRole(ROLES)
+            .requestMatchers(SECURELIST).hasAnyRole(ROLES)
             .anyRequest().authenticated()
-        );
-    
+        );        
     http.authenticationProvider(authenticationProvider());
-
-    // resolve compiler error with cast to Filter
-    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-    
+    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);    
     return http.build();
   }
 }
