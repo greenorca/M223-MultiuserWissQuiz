@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import './App.css';
 import {
   Routes,
@@ -15,7 +15,6 @@ import Register from "./components/register.component";
 import Home from "./components/home.component";
 import Profile from "./components/profile.component";
 
-//import GameSession from "./GameSession"
 import Rules from "./Rules"
 import QuestionList from "./QuestionList"
 import NotFound from "./NotFound"
@@ -27,38 +26,33 @@ import GameSelection from "./GameSelection";
 //import BoardModerator from "./components/board-moderator.component";
 //import BoardAdmin from "./components/board-admin.component";
 
-class App extends Component {
-  
-
-  render(){   
-
-    return (
-      <div>
-        <GlobalNavigation />
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/user" element={<BoardUser />} />
-            <Route path="/quiz" element={<GameSelection />} />
-            <Route path="/rules" element={<Rules />} />
-            <Route path="/aboutus" element={<AboutUs />} />
-            <Route path="/questionlist" element={<QuestionList />} />
-            <Route path="*" element={<NotFound />}/>
-          </Route>      
-      </Routes>
-      </div>
-    );
-  }
+const App = () => {  
+  return (
+    <div>
+      <GlobalNavigation />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/user" element={<BoardUser />} />
+          <Route path="/quiz" element={<GameSelection />} />
+          <Route path="/rules" element={<Rules />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/questionlist" element={<QuestionList />} />
+          <Route path="*" element={<NotFound />}/>
+        </Route>      
+    </Routes>
+    </div>
+  );
 }
 
-function Layout(){
+
+const Layout = () => {
   return (
-    <div className="App">
-      
+    <div className="App">      
       <div className="content">
         <header className="App-header">
           <h1>Welcome to the Wiss-Quiz</h1>
