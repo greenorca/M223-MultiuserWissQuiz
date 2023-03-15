@@ -8,13 +8,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/all")
+@RequestMapping("/api")
 public class PublicController {
 
-  @GetMapping(path = "/**")
+  @GetMapping(path = "/all**")
   public ResponseEntity<String> getTestPage() {
     ResponseEntity<String> result = ResponseEntity.ok()
-      .body("<h1>Test page</h1>");
+      .body("Test page");
+    return result;
+  }
+
+  @GetMapping(path = "/user")
+  public ResponseEntity<String> getUserPage() {
+    ResponseEntity<String> result = ResponseEntity.ok()
+      .body("Guggus");
     return result;
   }
 }

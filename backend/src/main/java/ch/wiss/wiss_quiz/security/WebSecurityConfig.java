@@ -21,7 +21,7 @@ public class WebSecurityConfig {
   @Autowired private UserDetailsServiceImpl userDetailsService;
   @Autowired private AuthenticationEntryPoint unauthorizedHandler;
 
-  private final static String[] WHITELIST = { "/api/auth/**", "/category", "/quiz", "/api/test/**", "/api/all/**" };
+  private final static String[] WHITELIST = { "/api/auth/**", "/category", "/quiz", "/api/**" };
   private final static String[] SECURELIST = { "/question" };
   private final static String[] ROLES = { "MODERATOR", "ADMIN"};
 
