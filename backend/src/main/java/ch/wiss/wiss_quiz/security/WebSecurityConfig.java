@@ -22,7 +22,7 @@ public class WebSecurityConfig {
   @Autowired private AuthenticationEntryPoint unauthorizedHandler;
 
   private final static String[] WHITELIST = { "/api/auth/**", "/category", "/quiz", "/api/**" };
-  private final static String[] SECURELIST = { "/question" };
+  private final static String[] SECURELIST = { "/question", "/category/admin/**" };
   private final static String[] ROLES = { "MODERATOR", "ADMIN"};
 
   @Bean
