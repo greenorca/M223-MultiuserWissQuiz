@@ -23,8 +23,8 @@ describe("Routing tests for App.js", () => {
       );
 
       // Assert
-      expect(screen.getByText("Mocked_Home"))
-      expect(screen.getByText("Mocked_GlobalNavigation"))
+      expect(screen.getByText("Mocked_Home")).toBeVisible()
+      expect(screen.getByText("Mocked_GlobalNavigation")).toBeVisible()
     });
 
     test("Rules route should render Rule component", () => {
@@ -38,8 +38,8 @@ describe("Routing tests for App.js", () => {
       );
 
       // Assert
-      expect(screen.getByText("Mocked_Rules"))
-      expect(screen.getByText("Mocked_GlobalNavigation"))
+      expect(screen.getByText("Mocked_Rules")).toBeVisible()
+      expect(screen.getByText("Mocked_GlobalNavigation")).toBeVisible()
     });
 
     test("AboutUs route should render AboutUs component", () => {
@@ -53,8 +53,8 @@ describe("Routing tests for App.js", () => {
       );
 
       // Assert
-      expect(screen.getByText("Mocked_AboutUs"))
-      expect(screen.getByText("Mocked_GlobalNavigation"))
+      expect(screen.getByText("Mocked_AboutUs")).toBeVisible()
+      expect(screen.getByText("Mocked_GlobalNavigation")).toBeVisible()
     });
 
     test("Quiz route should render GameSession component", () => {
@@ -68,8 +68,8 @@ describe("Routing tests for App.js", () => {
       );
 
       // Assert
-      expect(screen.getByText("Mocked_GameSession"))
-      expect(screen.getByText("Mocked_GlobalNavigation"))
+      expect(screen.getByText("Mocked_GameSession")).toBeVisible()
+      expect(screen.getByText("Mocked_GlobalNavigation")).toBeVisible()
     });
 
     test("Unkown path should trigger NotFound component", () => {
@@ -83,7 +83,7 @@ describe("Routing tests for App.js", () => {
       );
 
       // Assert
-      expect(screen.getByText("Mocked_NotFound"))
+      expect(screen.getByText("Mocked_NotFound")).toBeVisible()
     });
 
     test("questionslist path should render QuestionList component", () => {
@@ -97,6 +97,6 @@ describe("Routing tests for App.js", () => {
       );
 
       // Assert
-      expect(screen.getByText("Mocked_QuestionList"))
+      expect(screen.getByText("Mocked_QuestionList")).toBeVisible()
     });
 });

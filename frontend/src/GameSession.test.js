@@ -18,10 +18,10 @@ test("Questions and Answers are properly rendered", () => {
     )
 
     // Assert
-    expect(screen.getByText("Meine BeispielFrage"))
-    expect(screen.getByText("Antwort 1"))
-    expect(screen.getByText("Antwort 2"))
-    expect(screen.getByText("Antwort 3"))
+    expect(screen.getByText("Meine BeispielFrage")).toBeVisible()
+    expect(screen.getByText("Antwort 1")).toBeVisible()
+    expect(screen.getByText("Antwort 2")).toBeVisible()
+    expect(screen.getByText("Antwort 3")).toBeVisible()
 });
 
 test("Selecting right answer displays success", () => {
@@ -43,7 +43,7 @@ test("Selecting right answer displays success", () => {
     fireEvent.click(button);
 
     // Assert
-    expect(screen.getByText("Hurra"))
+    expect(screen.getByText("Hurra")).toBeVisible()
 });
 
 test("Selecting wrong answer displays failure", () => {
@@ -65,5 +65,5 @@ test("Selecting wrong answer displays failure", () => {
     fireEvent.click(button);
 
     // Assert
-    expect(screen.getByText("Ohh nein"))
+    expect(screen.getByText("Ohh nein")).toBeVisible()
 });

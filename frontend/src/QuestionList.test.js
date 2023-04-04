@@ -19,9 +19,9 @@ test("Table is properly renedered", () => {
     )
 
     // Assert
-    expect(screen.getByText("Meine BeispielFrage"));
-    expect(screen.getByText("Antwort 1"));
-    expect(screen.getByText("Antwort 2"));
-    expect(screen.getByText("Antwort 3"));
-    expect(screen.getByText("Meine Antwort 1"));
+    expect(screen.getByText("Meine BeispielFrage")).toBeVisible();
+    expect(screen.getByText("Antwort 1")).toBeVisible();
+    expect(screen.getByText("Antwort 2")).toBeVisible();
+    expect(screen.getByText("Antwort 3")).toBeVisible();
+    expect(screen.getByText("Meine Antwort 1")).toBeVisible()
 });
