@@ -1,39 +1,53 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+import Button from "./Button"
 
-class QuestionList extends React.Component {
+const QuestionList = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            questions: typeof props.questions === 'undefined' ? [] : props.questions
-        };
-    }
+    const [questions, setQuestions] = useState([])
 
-    componentDidMount() {
-        /**
-         * since questions is is only for moderator users,
-         * we fetch the jwt token and add it to the backend request 
-         */
+    useEffect(()=>{
+        console.log("question fun mounted")
+        loadDataAsync()        
+    },[])
+
+    const loadDataAsync = async() => {
+        setQuestions([])
         if (localStorage.getItem("user")){
             // fetch the jwt token
             const token = JSON.parse(localStorage.getItem("user")).accessToken;
-            fetch(process.env.REACT_APP_API_URL+"/question", {
-                    // add JWT token to request
-                    headers: {Authorization: "Bearer "+ token} 
-                })
-                .then(response => { console.log(response); return response.json()})
-                .then(data => this.setState({questions: data}))
-                .catch(err => {console.log(err)})
+            try {
+                fetch(process.env.REACT_APP_API_URL+"/question", {
+                        // add JWT token to request
+                        headers: {Authorization: "Bearer "+ token} 
+                    })
+                    .then(response => { console.log(response); return response.json()})
+                    .then(data => setQuestions(data))
+                    .catch(err => {console.log(err)})
+                } 
+                catch(ex){
+                    console.log("Mistigkeit: "+ex)
+                }
+        } else {
+            console.log("not login, no data...")
         }
     }
 
-    render(){
+    useEffect(()=>{
+        console.log("questions updated")
+    },[questions])
 
-        let questionRows = this.state.questions.map((question)=>{
+    const onQuestionsClick = (e) => {
+        console.log(e.target.attributes["data"].value )
+    }
+
+    const renderQuestions = () => {
+        return questions.map((question)=>{
             return(
-                <tr key={"qid_"+question.id}>
+                <tr key={"qid_"+question.id} >
                     <td>{question.id}</td>
-                    <td>{question.question}</td>
+                    <td>{question.question} 
+                        <button onClick={ onQuestionsClick } data = { question.id } > Edit </button>
+                    </td>
                     <td>
                         <ul>
                         {question.answers.map((answer)=>{
@@ -43,27 +57,25 @@ class QuestionList extends React.Component {
                         })}
                         </ul>
                     </td>
-                    <td>Wird nicht verraten ;)</td>
                 </tr>
             );
         });
+    }
 
-        return (
+    return (
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Question</th>
                         <th>Answers</th>
-                        <th>Solution</th>
                     </tr>
                 </thead>
                 <tbody>
-                    { questionRows }
+                    { renderQuestions() }
                 </tbody>
             </table>
         );
-    }
 }
 
 export default QuestionList;
